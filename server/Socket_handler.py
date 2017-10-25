@@ -12,6 +12,7 @@ class Socket_handler:
         self.list_of_addr = []
 
 #comment
+#comment2
     def init_the_view_obj(self,chattViewer_):
         self.chattViewer = chattViewer_
 
