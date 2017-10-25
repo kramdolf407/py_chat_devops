@@ -6,13 +6,14 @@ class ChattViewer:
         self.root = tkinter.Tk()
         self.root.title('Client Chat')
 
-    def buildGui(self):
+    def buildGui(self, master=None):
 
-        #we build the chattContent
+        #we build the chattContent/
         scroll = tkinter.Scrollbar(self.root)
         scroll.grid(row = 0, column = 1, sticky=tkinter.N+tkinter.S)
 
         self.chattContents = tkinter.Text(self.root, yscrollcommand  = scroll.set)
+# Uncomment later. When sending messages , change state=disabled
         #self.chattContents.configure(state="disabled")
         self.chattContents.grid(row = 0,column = 0)
 
@@ -25,6 +26,8 @@ class ChattViewer:
         #we build the button
         self.buttonToTrigg = tkinter.Button(self.root, text = "enter", command = self.sendMsgToConnecter)
         self.buttonToTrigg.grid(row = 1,column = 1)
+
+        self.buttonToTrigg.bind('<Return>', self.sendMsgToConnecter)
 
     def sendMsgToConnecter(self):
         self.connecter.sendMsg(self.entryOfUser.get())

@@ -1,12 +1,13 @@
 import tkinter
 
 class ChattViewer:
-    def __init__(self,listener_):
+    def __init__(self,listener_, master=None):
         self.listener = listener_
         self.root = tkinter.Tk()
         self.root.title('Server Chat')
 
-    def buildGui(self):
+
+    def buildGui(self, master=None):
         #we build the chattContent
         scroll = tkinter.Scrollbar(self.root)
         scroll.grid(row = 0, column = 1, sticky=tkinter.N+tkinter.S)
@@ -25,6 +26,9 @@ class ChattViewer:
         #we build the button
         self.buttonToTrigg = tkinter.Button(self.root, text = "enter", command = self.sendMsgToListener)
         self.buttonToTrigg.grid(row = 1,column = 1)
+
+        # master.bind('<Return>', self.sendMsgToListener)
+
 
     def sendMsgToListener(self):
         self.listener.sendMsg(self.entryOfUser.get())

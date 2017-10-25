@@ -2,22 +2,28 @@ import socket
 import _thread
 
 class Socket_handler:
+
+
     def __init__(self):
         self.serverSocket= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         self.serverSocket.bind(('',9999))
         self.serverSocket.listen()
         self.list_of_sockets = []
+        self.list_of_addr = []
 
     def init_the_view_obj(self,chattViewer_):
         self.chattViewer = chattViewer_
 
     def acceptConnection(self):
         clientSocket, addr = self.serverSocket.accept()
+        self.list_of_addr.append(addr)
         self.list_of_sockets.append(clientSocket)
 
         self.startReceiver(clientSocket)
-
-        #starta recev
+# TEST
+        print("Printing list of addresses")
+        print(self.list_of_addr)
+    #starta recev
 
     def sendMsg(self,text):
         for soc in self.list_of_sockets:
