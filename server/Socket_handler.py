@@ -6,7 +6,7 @@ class Socket_handler:
 
     def __init__(self):
         self.serverSocket= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        self.serverSocket.bind(('',9999))
+        self.serverSocket.bind(('0.0.0.0',9999))
         self.serverSocket.listen()
         self.list_of_sockets = []
         self.list_of_addr = []
@@ -23,7 +23,7 @@ class Socket_handler:
     #starta recev
 
     def sendMsg(self,text):
-        self.chattViewer.showMessage(text)
+        self.chattViewer.showMessage("Admin: "+text)
         for soc in self.list_of_sockets:
             soc.send(str.encode("Admin: "+text))
 
