@@ -12,6 +12,7 @@ class ChattViewer:
         scroll.grid(row = 0, column = 1, sticky=tkinter.N+tkinter.S)
 
         self.chattContents = tkinter.Text(self.root, yscrollcommand  = scroll.set)
+        self.chattContents.configure(state="disabled")
         self.chattContents.grid(row = 0,column = 0)
 
         scroll.config(command=self.chattContents.yview)
