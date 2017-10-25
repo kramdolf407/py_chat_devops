@@ -13,6 +13,7 @@ class Socket_handler:
 
 #comment
 #comment2
+#comment3
     def init_the_view_obj(self,chattViewer_):
         self.chattViewer = chattViewer_
 
