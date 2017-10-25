@@ -28,7 +28,7 @@ class Socket_handler:
 
     def func_to_receiver(self,csock):
         while True:
-            for csock in self.list_of_sockets:
-                msg = csock.recv(1024).decode()
-                self.chattViewer.showMessage(msg)
-                csock.send(str.encode(msg))
+            msg = csock.recv(1024).decode()
+            self.chattViewer.showMessage(msg)
+            for sock in self.list_of_sockets:
+                sock.send(str.encode(msg))
