@@ -19,7 +19,7 @@ class Socket_handler:
         self.list_of_addr.append(addr)
         self.list_of_sockets.append(clientSocket)
 
-        self.startReceiver(clientSocket)
+        self.startReceiver(clientSocket, addr)
 # TEST
         print("Printing list of addresses")
         print(self.list_of_addr)
@@ -29,12 +29,12 @@ class Socket_handler:
         for soc in self.list_of_sockets:
             soc.send(str.encode(text))
 
-    def startReceiver(self, csock):
-        _thread.start_new_thread(self.func_to_receiver,(csock,))
+    def startReceiver(self, csock, addr):
+        _thread.start_new_thread(self.func_to_receiver,(csock, addr))
 
-    def func_to_receiver(self,csock):
+    def func_to_receiver(self,csock, addr):
         while True:
             msg = csock.recv(1024).decode()
-            self.chattViewer.showMessage(msg)
+            self.chattViewer.showMessage(str(addr) + msg)
             for sock in self.list_of_sockets:
-                sock.send(str.encode(msg))
+                sock.send(str.encode(str(addr) + msg))
