@@ -35,6 +35,6 @@ class Socket_handler:
     def func_to_receiver(self,csock, addr):
         while True:
             msg = csock.recv(1024).decode()
-            self.chattViewer.showMessage(str(addr) + msg)
+            self.chattViewer.showMessage(str(addr) + ": " + msg)
             for sock in self.list_of_sockets:
-                sock.send(str.encode(str(addr) + msg))
+                sock.send(str.encode(str(addr) + ": "+ msg))
