@@ -4,6 +4,7 @@ class ChattViewer:
     def __init__(self,connecter_):
         self.connecter = connecter_
         self.root = tkinter.Tk()
+        self.root.title('Client Chat'
 
     def buildGui(self):
 
