@@ -3,20 +3,19 @@ import tkinter
 
 class ChattStartup():
     def __init__(self):
-        #super().__init__()
         self.root = tkinter.Tk()
-        self.label = None
-        self.entry = None
-        self.button = None
-        self.login = None
+        self.entry_srvip = None
+        self.entry_srvport = None
+        self.entry_username = None
+        self.entry_password = None
 
         self.build_window()
         self.run()
 
     def build_window(self):
 
-        self.label_srvip = tkinter.Label(self.root, text='Host IP: ', width=20)
-        self.label_srvport = tkinter.Label(self.root, text='Host port: ', width=20)
+        self.label_srvip = tkinter.Label(self.root, text='Connect to IP: ', width=20)
+        self.label_srvport = tkinter.Label(self.root, text='Connect to port: ', width=20)
         self.label_username = tkinter.Label(self.root, text='Your username: ', width=20)
         self.label_password = tkinter.Label(self.root, text='Password: ', width=20)
 
@@ -41,7 +40,6 @@ class ChattStartup():
         self.entry_password = tkinter.Entry(self.root, width=20)
         self.entry_password.focus_set()
         self.entry_password.grid(row=3,column=1)
-
 
         self.button_login = tkinter.Button(self.root, text='Login')
         self.button_register = tkinter.Button(self.root, text='Register New')
