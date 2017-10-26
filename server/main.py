@@ -2,10 +2,6 @@ from server.ChattViewer import ChattStartup , ChattViewer
 from server.Socket_handler import Socket_handler
 import _thread
 
-#test
-#test2
-#test3
-
 ChattStartup()
 
 def funcToThread():

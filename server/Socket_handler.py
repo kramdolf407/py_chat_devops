@@ -11,9 +11,6 @@ class Socket_handler:
         self.list_of_sockets = []
         self.list_of_addr = []
 
-#comment
-#comment2
-#comment3
     def init_the_view_obj(self,chattViewer_):
         self.chattViewer = chattViewer_
 
@@ -23,7 +20,6 @@ class Socket_handler:
         self.list_of_sockets.append(clientSocket)
 
         self.startReceiver(clientSocket, addr)
-    #starta recev
 
     def sendMsg(self,text):
         self.chattViewer.showMessage("Admin: "+text)

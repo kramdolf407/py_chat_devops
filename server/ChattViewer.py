@@ -6,13 +6,9 @@ started = False
 class ChattStartup():
 
         def __init__(self):
-            #super().__init__()
             self.root = tkinter.Tk()
-            self.label = None
-            self.entry = None
-            self.button = None
-            self.srvport= None
-            self.srvmaxcon = None
+            self.entry_srvmaxcon = None
+            self.entry_srvport = None
             self.build_window()
             self.run()
 

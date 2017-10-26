@@ -9,3 +9,5 @@ class User:
     def toString(self):
         return_string = "ID: " + str(self.id) + " | Username: "+ self.username + " | Password: "+ self.password + " | Email: "+ self.email
         return return_string
+
+    
