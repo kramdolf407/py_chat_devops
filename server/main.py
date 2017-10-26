@@ -3,6 +3,8 @@ from server.Socket_handler import Socket_handler
 import _thread
 
 #test
+#test2
+
 ChattStartup()
 
 def funcToThread():
