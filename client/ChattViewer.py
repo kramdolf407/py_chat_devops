@@ -3,7 +3,7 @@ import tkinter
 
 class ChattStartup():
     def __init__(self):
-        super().__init__()
+        #super().__init__()
         self.root = tkinter.Tk()
         self.label = None
         self.entry = None
