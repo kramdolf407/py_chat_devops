@@ -27,7 +27,7 @@ class Collection_of_users:
                 return "Login succeed"
 
         return "Login failed"
-
+#test
     def write_users_to_file(self):
 
         file = open("users.txt", "a")
