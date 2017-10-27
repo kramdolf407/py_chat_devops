@@ -1,10 +1,20 @@
-username
-passw
-email
-namn
+peter
+abc
+peter@mail
+Peter
 
-username2
-etc..
-bka
-bka
+Lars
+abc2
+lars@mail
+Lars
+
+peter
+passwd
+peter@mail
+Peter
+
+Sara
+passwd2
+sara@mail
+Sara
 
