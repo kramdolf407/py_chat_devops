@@ -15,7 +15,7 @@ class ChattStartup():
         def build_window(self):
 
             self.label_srvmaxcon = tkinter.Label(self.root, text='Max connections: ', width=20)
-            self.label_srvport = tkinter.Label(self.root, text='Port: ', width=20)
+            self.label_srvport = tkinter.Label(self.root, text='Preferred port: ', width=20)
 
             self.label_srvmaxcon.grid(row=0, column=0)
             self.label_srvport.grid(row=1, column=0)
@@ -23,16 +23,17 @@ class ChattStartup():
             self.entry_srvmaxcon = tkinter.Entry(self.root, width=20)
             self.entry_srvmaxcon.focus_set()
             self.entry_srvmaxcon.grid(row=0, column=1)
-            self.entry_srvmaxcon.bind('<Button-1>', self.get_srv_conf)
+            # self.entry_srvmaxcon.bind('<Button-1>', self.get_srv_conf)
 
             self.entry_srvport = tkinter.Entry(self.root, width=20)
             self.entry_srvport.focus_set()
             self.entry_srvport.grid(row=1, column=1)
             self.entry_srvport.bind('<Button-2>', self.get_srv_conf)
 
-            self.button_login = tkinter.Button(self.root, text='Host channel')
-            self.button_login.grid(row=2, column=0)
-            self.button_login.bind('<Button-3>', self.get_srv_conf)
+            self.button_start = tkinter.Button(self.root, text='Start chat channel')
+            self.button_start.focus()
+            self.button_start.grid(row=2, column=0)
+            self.button_start.bind('<Return>', self.get_srv_conf)
 
         def run(self):
             self.root.mainloop()
@@ -58,9 +59,7 @@ class ChattViewer():
         self.root.destroy()
 
     def buildGui(self, master=None):
-        global started
         #we build the chattContent
-        started = True
         scroll = tkinter.Scrollbar(self.root)
         scroll.grid(row = 0, column = 1, sticky=tkinter.N+tkinter.S)
 
@@ -78,8 +77,7 @@ class ChattViewer():
         #we build the button
         self.buttonToTrigg = tkinter.Button(self.root, text = "enter", command = self.sendMsgToListener)
         self.buttonToTrigg.grid(row = 1,column = 1)
-
-        # master.bind('<Return>', self.sendMsgToListener)
+        self.buttonToTrigg.bind('<Return>')
 
     def sendMsgToListener(self):
         self.listener.sendMsg(self.entryOfUser.get())

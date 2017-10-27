@@ -35,17 +35,18 @@ class ChattStartup():
         self.entry_username = tkinter.Entry(self.root, width=20)
         self.entry_username.focus_set()
         self.entry_username.grid(row=2,column=1)
-        self.entry_username.bind('<Return>', self.get_login_event)
+        self.entry_username.bind('<Button-1>', self.get_login_event)
 
         self.entry_password = tkinter.Entry(self.root, width=20)
-        self.entry_password.focus_set()
         self.entry_password.grid(row=3,column=1)
+        self.entry_password.bind('<Button-2>', self.get_login_event)
 
         self.button_login = tkinter.Button(self.root, text='Login')
         self.button_register = tkinter.Button(self.root, text='Register New')
         self.button_login.grid(row=4, column=0)
         self.button_register.grid(row=4, column=1)
-        self.button_register.bind('<Button-1>', self.get_login_event)
+        self.button_login.bind('<Return>', self.get_login_event)
+        self.button_register.bind('<Return>', self.get_login_event)
 
     def run(self):
         self.root.mainloop()
@@ -56,6 +57,12 @@ class ChattStartup():
         self.password = self.entry_password.get()
         self.root.quit()
 
+#    def get_register_event(self, event):
+#        self.username = self.entry_username.get()
+#        self.password = self.entry_password.get()
+#        print(self.username)
+#        print(self.password)
+#        self.root.quit()
 
 class ChattViewer:
     def __init__(self,connecter_):
@@ -82,9 +89,9 @@ class ChattViewer:
 
         #we build the button
         self.buttonToTrigg = tkinter.Button(self.root, text = "enter", command = self.sendMsgToConnecter)
+        self.buttonToTrigg.bind('<Return>', self.sendMsgToConnecter())
         self.buttonToTrigg.grid(row = 1,column = 1)
 
-        self.buttonToTrigg.bind('<Return>', self.sendMsgToConnecter)
 
     def sendMsgToConnecter(self):
         self.connecter.sendMsg(self.entryOfUser.get())
