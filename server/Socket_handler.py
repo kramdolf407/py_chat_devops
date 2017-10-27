@@ -1,6 +1,6 @@
 import socket
 import _thread
-
+from server.user_class import *
 class Socket_handler:
 
 
@@ -10,6 +10,8 @@ class Socket_handler:
         self.serverSocket.listen()
         self.list_of_sockets = []
         self.list_of_addr = []
+        #self.list_of_users = []
+        #self.read_file_of_users()
 
     def init_the_view_obj(self,chattViewer_):
         self.chattViewer = chattViewer_
