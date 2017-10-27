@@ -1,5 +1,5 @@
 import tkinter
-
+from client.user_class import *
 
 class ChattStartup():
     def __init__(self):
