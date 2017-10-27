@@ -32,13 +32,17 @@ class Collection_of_users:
 
         file = open("users.txt", "a")
         for user in self.list_of_users:
+            username = user.username
+            password = user.password
+            email = user.email
+            name = user.name
 
             file.write(username+"\n")
             file.write(password+"\n")
             file.write(email+"\n")
             file.write(name+"\n")
             file.write("\n")
-            file.close()
+        file.close()
 
 
     def read_file_of_users(self):

@@ -23,16 +23,14 @@ class ChattStartup():
             self.entry_srvmaxcon = tkinter.Entry(self.root, width=20)
             self.entry_srvmaxcon.focus_set()
             self.entry_srvmaxcon.grid(row=0, column=1)
-            self.entry_srvmaxcon.bind('<Button-1>', self.get_srv_conf)
 
             self.entry_srvport = tkinter.Entry(self.root, width=20)
             self.entry_srvport.focus_set()
             self.entry_srvport.grid(row=1, column=1)
-            self.entry_srvport.bind('<Button-2>', self.get_srv_conf)
 
             self.button_login = tkinter.Button(self.root, text='Host channel')
             self.button_login.grid(row=2, column=0)
-            self.button_login.bind('<Button-3>', self.get_srv_conf)
+            self.button_login.bind('<Button-1>', self.get_srv_conf)
 
         def run(self):
             self.root.mainloop()
