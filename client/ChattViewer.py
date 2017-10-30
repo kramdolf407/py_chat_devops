@@ -93,16 +93,19 @@ class ChattStartup():
         answer = self.test_obj.add_new_does_name_exist(self.username_register)
         if answer == False:
             tkinter.messagebox.showinfo("alert", "Username is already used")
+        # IF user already exists:
+        # Users try logging in with password
         if answer == True:
             self.test_obj.add_new(self.username_register, self.userpass_register, self.email_login, self.nickname_login)
             tkinter.messagebox.showinfo("alert", "new user added")
-            # IF user already exists:
-    # Users try logging in with password
+    # CLEAN ENTRY FIELDS
+            self.root.quit()
+
 
 
     # IF user does NOT exist:
         # ADD:
-        self.root.quit()
+
 
 
 # EDIT ------------

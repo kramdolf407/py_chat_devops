@@ -1,3 +1,5 @@
+import tkinter.messagebox as msg
+
 class User:
 
     def __init__(self, username_, password_, email_, name_):
