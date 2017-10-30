@@ -27,12 +27,14 @@ class Collection_of_users:
         self.list_of_users = []
 
     def add_new_does_name_exist(self, username):
-        print("In add_new_deos_name_exist")
+        print("In add_new_does_name_exist")
         for user in self.list_of_users:
             if user.does_name_exist(username) == True:
-                print("user exist")
+                print("user already exist!")
                 return False
-        print("username is available")
+        print("username is available!")
+    # Ask for confirm
+    # Send to ADD_NEW?
         return True
 
 # Bind to Register

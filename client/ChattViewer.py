@@ -76,6 +76,8 @@ class ChattStartup():
         self.password_login = self.entry_password.get()
         self.email_login = self.entry_email.get()
         self.nickname_login = self.entry_nickname.get()
+        print("ChattViewer - Get_login_event")
+        # TRY TO LOGIN
         self.root.quit()
 
 # Bind to register
@@ -87,9 +89,17 @@ class ChattStartup():
         self.nickname_login = self.entry_nickname.get()
         self.userip_connect = self.entry_srvip.get()
         self.userport_connect = self.entry_srvport.get()
-        print("In get_register_event in ChattViewer")
         self.test_obj.read_file_of_users()
         self.test_obj.add_new_does_name_exist(self.username_register)
+    # IF user already exists:
+    # Users try logging in with password
+        if False:
+            print("Answer false, user exists")
+        else:
+            print("True. Does not exist")
+
+    # IF user does NOT exist:
+        # ADD:
         self.test_obj.add_new(self.username_register, self.userpass_register, self.email_login, self.nickname_login)
         self.root.quit()
 
