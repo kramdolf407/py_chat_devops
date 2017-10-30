@@ -8,12 +8,14 @@ class User:
         self.name = name_
 
     def does_name_exist(self, username):
+        print("In does_name_exist")
         if username == self.username:
             return True
         else:
             return False
 
     def does_user_exist(self, username, password):
+        print("In does_user_exist")
         if username == self.username and password == self.password:
             return True
         else:
@@ -25,6 +27,7 @@ class Collection_of_users:
         self.list_of_users = []
 
     def add_new_does_name_exist(self, username):
+        print("In add_new_deos_name_exist")
         for user in self.list_of_users:
             if user.does_name_exist(username) == True:
                 print("user exist")
@@ -34,11 +37,13 @@ class Collection_of_users:
 
 # Bind to Register
     def add_new(self, username, password, email, name):
+        print("In add_new")
         user1 = User(username, password, email, name)
         self.list_of_users.append(user1)
 
 # Bind to Login
     def log_in(self, username, password):
+        print("In log_in")
         for user in self.list_of_users:
             if user.does_user_exist(username, password) == True:
                 return "Login succeed"
@@ -46,7 +51,7 @@ class Collection_of_users:
         return "Login failed"
 #test
     def write_users_to_file(self):
-
+        print("In write_users_to_file")
         file = open("users.txt", "a")
         for user in self.list_of_users:
             username = user.username
@@ -62,6 +67,7 @@ class Collection_of_users:
         file.close()
 
     def read_file_of_users(self):
+        print("In read_file_of_users")
         try:
             file = open("users.txt", "r")
             while True:
