@@ -21,8 +21,8 @@ class ChattStartup():
             self.entry_srvport.focus_set()
             self.entry_srvport.grid(row=1, column=1)
 
-            self.button_login = tkinter.Button(self.root, text='Host channel')
-            self.button_login.grid(row=2, column=0)
+            self.button_login = tkinter.Button(self.root, text='Host channel', bg='chartreuse3')
+            self.button_login.grid(row=2, column=1)
             self.button_login.bind('<Button-1>', self.server_config_start)
 
         def run(self):
@@ -79,7 +79,7 @@ class ChattViewer():
         self.entryOfUser.grid(row = 1,column = 0)
 
         #we build the button
-        self.buttonToTrigg = tkinter.Button(self.root, text = "Send", bg='red', bd=3, command = self.sendMsgToListener)
+        self.buttonToTrigg = tkinter.Button(self.root, text = "Send", bg='IndianRed1', bd=3, command = self.sendMsgToListener)
         self.buttonToTrigg.grid(row = 1,column = 1)
 
         # master.bind('<Return>', self.sendMsgToListener)
