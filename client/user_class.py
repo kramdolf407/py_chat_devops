@@ -28,7 +28,7 @@ class Collection_of_users:
     def __init__(self):
         self.list_of_users = []
 
-    def add_new_does_name_exist(self, username):
+    def is_name_available(self, username):
         print("In add_new_does_name_exist")
         for user in self.list_of_users:
             if user.does_name_exist(username) == True:
@@ -57,7 +57,7 @@ class Collection_of_users:
 #test
     def write_users_to_file(self):
         print("In write_users_to_file")
-        file = open("users.txt", "a")
+        file = open("users.txt", "w")
         for user in self.list_of_users:
             username = user.username
             password = user.password
