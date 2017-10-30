@@ -14,13 +14,14 @@ class User:
             return False
 
 class Collection_of_users:
+
     def __init__(self):
         self.list_of_users = []
-
+# Bind to Register
     def add_new(self, username, password, email, name):
         user1 = User(username, password, email, name)
         self.list_of_users.append(user1)
-
+# Bind to Login
     def log_in(self, username, password):
         for user in self.list_of_users:
             if (user.is_this_user(username, password) == True):
@@ -43,8 +44,6 @@ class Collection_of_users:
             file.write(name+"\n")
             file.write("\n")
         file.close()
-
-
 
     def read_file_of_users(self):
         try:

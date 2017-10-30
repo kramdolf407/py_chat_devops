@@ -1,12 +1,19 @@
 import socket
 import _thread
 
+server_ip = 'localhost'
+server_port = 9999
+
 class Connecter:
+
     def __init__(self):
         self.clientSocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
-    def connect(self,ip, port):
-        self.clientSocket.connect((ip,port))
+    def connect(self,server_ip, server_port):
+        self.clientSocket.connect((server_ip, server_port))
+
+    def connect2(self, server_ip, server, port):
+        self.clientSocket.connect((server_port))
 
     def sendMsg(self,text):
         self.clientSocket.send(str.encode(text))
@@ -19,3 +26,21 @@ class Connecter:
         while True:
             msg = self.clientSocket.recv(1024).decode()
             self.chattViewer.showMessage(msg)
+
+    def connect_conf(ip, port):
+        global server_ip
+        global server_port
+
+        server_ip = ip
+        server_port = port
+        clientSocket.connect((server_ip, server_port))
+
+class ConnecterConf:
+
+    def connect_conf(ip, port):
+        global server_ip
+        global server_port
+        self = Connecter
+        server_ip = ip
+        server_port = port
+        Connecter.connect(self, server_ip, server_port)

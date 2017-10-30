@@ -1,12 +1,16 @@
 import socket
 import _thread
 from server.user_class import *
+
+
+server_port = 9999
+
 class Socket_handler:
 
 
     def __init__(self):
         self.serverSocket= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        self.serverSocket.bind(('0.0.0.0',9999))
+        self.serverSocket.bind(('localhost',int(server_port)))
         self.serverSocket.listen()
         self.list_of_sockets = []
         self.list_of_addr = []
@@ -37,3 +41,9 @@ class Socket_handler:
             self.chattViewer.showMessage(str(addr)+": "+msg)
             for sock in self.list_of_sockets:
                 sock.send(str.encode(str(addr)+": "+msg))
+
+    def server_port(srvport):
+        global server_port
+        server_port = srvport
+
+

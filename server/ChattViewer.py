@@ -1,5 +1,6 @@
 import tkinter
 from tkinter import messagebox
+from server.Socket_handler import *
 
 started = False
 
@@ -7,22 +8,14 @@ class ChattStartup():
 
         def __init__(self):
             self.root = tkinter.Tk()
-            self.entry_srvmaxcon = None
             self.entry_srvport = None
             self.build_window()
             self.run()
 
         def build_window(self):
 
-            self.label_srvmaxcon = tkinter.Label(self.root, text='Max connections: ', width=20)
-            self.label_srvport = tkinter.Label(self.root, text='Port: ', width=20)
-
-            self.label_srvmaxcon.grid(row=0, column=0)
+            self.label_srvport = tkinter.Label(self.root, text='Port (999-65535): ', width=20)
             self.label_srvport.grid(row=1, column=0)
-
-            self.entry_srvmaxcon = tkinter.Entry(self.root, width=20)
-            self.entry_srvmaxcon.focus_set()
-            self.entry_srvmaxcon.grid(row=0, column=1)
 
             self.entry_srvport = tkinter.Entry(self.root, width=20)
             self.entry_srvport.focus_set()
@@ -30,17 +23,30 @@ class ChattStartup():
 
             self.button_login = tkinter.Button(self.root, text='Host channel')
             self.button_login.grid(row=2, column=0)
-            self.button_login.bind('<Button-1>', self.get_srv_conf)
+            self.button_login.bind('<Button-1>', self.server_config_start)
 
         def run(self):
             self.root.mainloop()
             self.root.destroy()
 
-        def get_srv_conf(self, event):
-            self.srvmaxcon = self.entry_srvmaxcon.get()
-            self.srvport = self.entry_srvport.get()
-            self.root.quit()
+        def server_config_start(self, new_port):
+            new_port = self.entry_srvport.get()
+            if not self.port_validate(new_port):
+                tkinter.messagebox.showinfo('Port invalid', 'You can only choose one port from 999 to 65535')
+                return
+            else:
+                Socket_handler.server_port(new_port)
+                self.root.quit()
+                return
 
+        def port_validate(self, new_port):
+            try:
+                new_port = int(new_port)
+                if new_port > 999 and new_port <= 65535:
+                    return True
+                return False
+            except:
+                return False
 
 class ChattViewer():
 
@@ -81,8 +87,6 @@ class ChattViewer():
 
     def sendMsgToListener(self):
         self.listener.sendMsg(self.entryOfUser.get())
-
-
 
     def showMessage(self,text):
         self.chattContents.insert(tkinter.END,text+"\n")
