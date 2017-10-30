@@ -66,7 +66,7 @@ class Collection_of_users:
 
             file.write(username+"\n")
             file.write(password+"\n")
-            file.write(emailf+"\n")
+            file.write(email+"\n")
             file.write(name+"\n")
             file.write("\n")
         file.close()
