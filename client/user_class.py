@@ -50,9 +50,9 @@ class Collection_of_users:
         print("In log_in")
         for user in self.list_of_users:
             if user.does_user_exist(username, password) == True:
-                return "Login succeed"
+                return True
 
-        return "Login failed"
+        return False
 #test
     def write_users_to_file(self):
         print("In write_users_to_file")

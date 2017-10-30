@@ -77,8 +77,13 @@ class ChattStartup():
         self.email_login = self.entry_email.get()
         self.nickname_login = self.entry_nickname.get()
         print("ChattViewer - Get_login_event")
-        # TRY TO LOGIN
-        self.root.quit()
+        answer = self.test_obj.log_in(self.username_login, self.password_login)
+        if answer == True:
+            #login here
+            self.root.quit()
+
+        if answer == False:
+            tkinter.messagebox.showinfo("alert", "Login was not successful")
 
 # Bind to register
     def get_register_event(self, event):
