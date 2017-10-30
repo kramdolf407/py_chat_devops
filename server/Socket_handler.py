@@ -1,10 +1,7 @@
 import socket
 import _thread
-#from server.user_class import *
-
 
 class Socket_handler:
-
 
     def __init__(self):
         self.serverSocket= socket.socket(socket.AF_INET,socket.SOCK_STREAM)

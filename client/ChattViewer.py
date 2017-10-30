@@ -90,17 +90,18 @@ class ChattStartup():
         self.userip_connect = self.entry_srvip.get()
         self.userport_connect = self.entry_srvport.get()
         self.test_obj.read_file_of_users()
-        self.test_obj.add_new_does_name_exist(self.username_register)
-    # IF user already exists:
+        answer = self.test_obj.add_new_does_name_exist(self.username_register)
+        if answer == False:
+            tkinter.messagebox.showinfo("alert", "Username is already used")
+        if answer == True:
+            self.test_obj.add_new(self.username_register, self.userpass_register, self.email_login, self.nickname_login)
+            tkinter.messagebox.showinfo("alert", "new user added")
+            # IF user already exists:
     # Users try logging in with password
-        if False:
-            print("Answer false, user exists")
-        else:
-            print("True. Does not exist")
+
 
     # IF user does NOT exist:
         # ADD:
-        self.test_obj.add_new(self.username_register, self.userpass_register, self.email_login, self.nickname_login)
         self.root.quit()
 
 

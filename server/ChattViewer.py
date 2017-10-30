@@ -48,8 +48,6 @@ class ChattStartup():
             except:
                 return False
 
-
-
 class ChattViewer():
 
     def __init__(self,listener_, master=None):
@@ -57,7 +55,6 @@ class ChattViewer():
         self.listener = listener_
         self.root = tkinter.Tk()
         self.root.title('Server Chat')
-
 
     def start(self):
         self.root.mainloop()

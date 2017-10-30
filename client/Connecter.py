@@ -12,9 +12,6 @@ class Connecter:
     def connect(self,server_ip, server_port):
         self.clientSocket.connect((server_ip, server_port))
 
-    def connect2(self, server_ip, server, port):
-        self.clientSocket.connect((server_port))
-
     def sendMsg(self,text):
         self.clientSocket.send(str.encode(text))
 
@@ -27,13 +24,13 @@ class Connecter:
             msg = self.clientSocket.recv(1024).decode()
             self.chattViewer.showMessage(msg)
 
-    def connect_conf(ip, port):
+    def connect_conf(self, ip, port):
         global server_ip
         global server_port
 
         server_ip = ip
         server_port = port
-        clientSocket.connect((server_ip, server_port))
+        self.clientSocket.connect((server_ip, server_port))
 
 class ConnecterConf:
 
