@@ -11,7 +11,7 @@ class ChattStartup():
         self.entry_srvport = None
         self.entry_username = None
         self.entry_password = None
-        self.entry_email = None
+        self.entry_email_login = None
         self.entry_nickname = None
         self.test_obj = Collection_of_users()
 
@@ -65,7 +65,7 @@ class ChattStartup():
         self.button_login.grid(row=6, column=0)
         self.button_register.grid(row=6, column=1)
         self.button_login.bind('<Button-1>', self.get_login_event)
-        self.button_register.bind('<Button-1>', self.get_login_event)
+        self.button_register.bind('<Button-1>', self.get_register_event)
 
     def run(self):
         self.root.mainloop()
@@ -84,7 +84,7 @@ class ChattStartup():
         self.username_register = self.entry_username.get()
         self.userpass_register = self.entry_password.get()
         self.email_login = self.entry_email.get()
-        self.nickname_login = self.nickname_login.get()
+        self.nickname_login = self.entry_nickname.get()
         self.userip_connect = self.entry_srvip.get()
         self.userport_connect = self.entry_srvport.get()
         print("In get_register_event in ChattViewer")
