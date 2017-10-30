@@ -89,8 +89,8 @@ class Collection_of_users:
             return False
 
 
-list1 = Collection_of_users()
+#list1 = Collection_of_users()
 #list1.add_new("peter", "passwd", "peter@mail", "Peter")
 #list1.add_new("Sara", "passwd2", "sara@mail", "Sara")
 #list1.write_users_to_file()
-list1.read_file_of_users()
+#list1.read_file_of_users()
