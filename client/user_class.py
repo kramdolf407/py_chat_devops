@@ -34,7 +34,8 @@ class Collection_of_users:
             if user.does_name_exist(username) == True:
                 print("user already exist!")
                 return False
-        print("username is available!")
+        print("username is not in use!")
+
     # Ask for confirm
     # Send to ADD_NEW?
         return True
@@ -65,7 +66,7 @@ class Collection_of_users:
 
             file.write(username+"\n")
             file.write(password+"\n")
-            file.write(email+"\n")
+            file.write(emailf+"\n")
             file.write(name+"\n")
             file.write("\n")
         file.close()

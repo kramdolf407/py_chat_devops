@@ -20,13 +20,13 @@ class ChattStartup():
 
     def build_window(self):
 
-        self.label_srvip = tkinter.Label(self.root, text='Connect to IP: ', width=20)
-        self.label_srvport = tkinter.Label(self.root, text='Connect to port: ', width=20)
+        self.label_srvip = tkinter.Label(self.root, text='Connect to IP: ', width=20, bd=2)
+        self.label_srvport = tkinter.Label(self.root, text='Connect to port: ', width=20, bd=2)
 
-        self.label_username = tkinter.Label(self.root, text='Your username: ', width=20)
-        self.label_password = tkinter.Label(self.root, text='Password: ', width=20)
-        self.label_email = tkinter.Label(self.root, text='Email: ', width=20)
-        self.label_nickname = tkinter.Label(self.root, text='Nickname: ', width=20)
+        self.label_username = tkinter.Label(self.root, text='Your username: ', width=20, bd=2)
+        self.label_password = tkinter.Label(self.root, text='Password: ', width=20, bd=2)
+        self.label_email = tkinter.Label(self.root, text='Email: ', width=20, bd=2)
+        self.label_nickname = tkinter.Label(self.root, text='Nickname: ', width=20, bd=2)
         # Grid buttons
         self.label_srvip.grid(row=0,column=0)
         self.label_srvport.grid(row=1,column=0)
@@ -48,7 +48,7 @@ class ChattStartup():
         self.entry_username.grid(row=2,column=1)
         self.entry_username.bind(self.get_login_event)
 
-        self.entry_password = tkinter.Entry(self.root, width=20)
+        self.entry_password = tkinter.Entry(self.root, width=20, show="*")
         self.entry_password.grid(row=3,column=1)
         self.entry_password.bind(self.get_login_event)
 
@@ -70,20 +70,24 @@ class ChattStartup():
     def run(self):
         self.root.mainloop()
         self.root.destroy()
+
 # Bind to login
     def get_login_event(self, event):
         self.username_login = self.entry_username.get()
         self.password_login = self.entry_password.get()
         self.email_login = self.entry_email.get()
         self.nickname_login = self.entry_nickname.get()
-        print("ChattViewer - Get_login_event")
-        answer = self.test_obj.log_in(self.username_login, self.password_login)
-        if answer == True:
-            #login here
-            self.root.quit()
+        answer1 = self.test_obj.add_new_does_name_exist(self.username_login)
+        if answer1 == False:
+            print("False. Didn't exist")
+        else:
+            print("Username does exist")
 
-        if answer == False:
-            tkinter.messagebox.showinfo("alert", "Login was not successful")
+        answer2 = self.test_obj.log_in(self.username_login, self.password_login)
+        if answer2 == True:
+            self.root.quit()
+        if answer2 == False:
+            tkinter.messagebox.showinfo("Alert!", "The password for the specific user is incorrect.")
 
 # Bind to register
     def get_register_event(self, event):
