@@ -87,8 +87,8 @@ class ChattStartup():
         self.nickname_login = self.nickname_login.get()
         self.userip_connect = self.entry_srvip.get()
         self.userport_connect = self.entry_srvport.get()
+        self.test_obj.add_new_does_name_exist(self.username_register)
         self.test_obj.add_new(self.username_register, self.userpass_register, self.email_login, self.nickname_login)
-        User.is_this_user(self.username_register, self.userpass_register)
         self.root.quit()
 
 

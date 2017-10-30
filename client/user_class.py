@@ -8,13 +8,13 @@ class User:
         self.name = name_
 
     def does_name_exist(self, username):
-        if (username == self.username):
+        if username == self.username:
             return True
         else:
             return False
 
     def does_user_exist(self, username, password):
-        if (username == self.username) and (password == self.password):
+        if username == self.username and password == self.password:
             return True
         else:
             return False
@@ -27,8 +27,10 @@ class Collection_of_users:
     def add_new_does_name_exist(self, username):
         for user in self.list_of_users:
             if user.does_name_exist(username) == True:
-                return "username is already used"
-        return "username is available"
+                print("user exist")
+                return False
+        print("username is available")
+        return True
 
 # Bind to Register
     def add_new(self, username, password, email, name):
