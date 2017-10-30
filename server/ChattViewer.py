@@ -48,6 +48,8 @@ class ChattStartup():
             except:
                 return False
 
+
+
 class ChattViewer():
 
     def __init__(self,listener_, master=None):

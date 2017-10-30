@@ -3,8 +3,6 @@ import _thread
 from server.user_class import *
 
 
-server_port = 9999
-
 class Socket_handler:
 
 
@@ -45,5 +43,3 @@ class Socket_handler:
     def server_port(srvport):
         global server_port
         server_port = srvport
-
-

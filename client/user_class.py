@@ -17,10 +17,20 @@ class Collection_of_users:
 
     def __init__(self):
         self.list_of_users = []
+
+    def add_new_does_name_exist(self, username):
+        try:
+            print("hi success")
+            return "Login success"
+        except:
+            print("Hi user already exists")
+            return "Username already exist"
+
 # Bind to Register
     def add_new(self, username, password, email, name):
         user1 = User(username, password, email, name)
         self.list_of_users.append(user1)
+
 # Bind to Login
     def log_in(self, username, password):
         for user in self.list_of_users:

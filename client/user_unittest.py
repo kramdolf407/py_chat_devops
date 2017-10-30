@@ -1,4 +1,4 @@
-from server.user_class import User
+from client.user_class import User
 import unittest
 
 User1 = User(1,'MyName','MyNickname','MyPassword')

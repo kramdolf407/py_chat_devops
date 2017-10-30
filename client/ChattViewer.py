@@ -3,6 +3,7 @@ import tkinter.messagebox
 from client.user_class import *
 from client.Connecter import *
 
+
 class ChattStartup():
     def __init__(self):
         self.root = tkinter.Tk()
@@ -12,6 +13,7 @@ class ChattStartup():
         self.entry_password = None
         self.entry_email = None
         self.entry_nickname = None
+        self.test_obj = Collection_of_users()
 
         self.build_window()
         self.run()
@@ -78,12 +80,15 @@ class ChattStartup():
 
 # Bind to register
     def get_register_event(self, event):
+
         self.username_register = self.entry_username.get()
         self.userpass_register = self.entry_password.get()
+        self.email_login = self.entry_email.get()
+        self.nickname_login = self.nickname_login.get()
         self.userip_connect = self.entry_srvip.get()
         self.userport_connect = self.entry_srvport.get()
+        self.test_obj.add_new(self.username_register, self.userpass_register, self.email_login, self.nickname_login)
         User.is_this_user(self.username_register, self.userpass_register)
-        # Collection_of_users.add_new(self.username_register, self.userpass_register)
         self.root.quit()
 
 
