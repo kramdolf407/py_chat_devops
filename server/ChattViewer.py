@@ -79,7 +79,7 @@ class ChattViewer():
         self.entryOfUser.grid(row = 1,column = 0)
 
         #we build the button
-        self.buttonToTrigg = tkinter.Button(self.root, text = "Send", bg='red', command = self.sendMsgToListener)
+        self.buttonToTrigg = tkinter.Button(self.root, text = "Send", bg='red', bd=3, command = self.sendMsgToListener)
         self.buttonToTrigg.grid(row = 1,column = 1)
 
         # master.bind('<Return>', self.sendMsgToListener)
