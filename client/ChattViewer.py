@@ -60,8 +60,8 @@ class ChattStartup():
         self.entry_nickname.grid(row=5, column=1)
         self.entry_nickname.bind(self.get_login_event)
 
-        self.button_login = tkinter.Button(self.root, text='Login', bd=3)
-        self.button_register = tkinter.Button(self.root, text='Register New', bd=3)
+        self.button_login = tkinter.Button(self.root, text='Login', bd=3, bg='SpringGreen3')
+        self.button_register = tkinter.Button(self.root, text='Register New', bd=3, bg='salmon1')
         self.button_login.grid(row=6, column=0)
         self.button_register.grid(row=6, column=1)
         self.button_login.bind('<Button-1>', self.get_login_event)
@@ -105,8 +105,6 @@ class ChattStartup():
             tkinter.messagebox.showinfo("Info", "New user registered and saved to file")
     # CLEAN ENTRY FIELDS
             self.root.quit()
-
-
 
     # IF user does NOT exist:
         # ADD:
