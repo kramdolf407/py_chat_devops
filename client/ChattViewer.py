@@ -35,33 +35,33 @@ class ChattStartup():
         self.label_email.grid(row=4,column=0)
         self.label_nickname.grid(row=5,column=0)
         # Grid entries, set focus and bind keys:
-        self.entry_srvip = tkinter.Entry(self.root, width=20)
+        self.entry_srvip = tkinter.Entry(self.root, width=20, bd=2)
         self.entry_srvip.focus_set()
         self.entry_srvip.grid(row=0,column=1)
 
-        self.entry_srvport = tkinter.Entry(self.root, width=20)
+        self.entry_srvport = tkinter.Entry(self.root, width=20, bd=2)
         self.entry_srvport.focus_set()
         self.entry_srvport.grid(row=1,column=1)
 
-        self.entry_username = tkinter.Entry(self.root, width=20)
+        self.entry_username = tkinter.Entry(self.root, width=20, bd=2)
         self.entry_username.focus_set()
         self.entry_username.grid(row=2,column=1)
         self.entry_username.bind(self.get_login_event)
 
-        self.entry_password = tkinter.Entry(self.root, width=20)
+        self.entry_password = tkinter.Entry(self.root, width=20, bd=2, show="*")
         self.entry_password.grid(row=3,column=1)
         self.entry_password.bind(self.get_login_event)
 
-        self.entry_email = tkinter.Entry(self.root, width=20)
+        self.entry_email = tkinter.Entry(self.root, width=20, bd=2)
         self.entry_email.grid(row=4, column=1)
         self.entry_email.bind(self.get_login_event)
 
-        self.entry_nickname = tkinter.Entry(self.root, width=20)
+        self.entry_nickname = tkinter.Entry(self.root, width=20, bd=2)
         self.entry_nickname.grid(row=5, column=1)
         self.entry_nickname.bind(self.get_login_event)
 
-        self.button_login = tkinter.Button(self.root, text='Login')
-        self.button_register = tkinter.Button(self.root, text='Register New')
+        self.button_login = tkinter.Button(self.root, text='Login', bd=3)
+        self.button_register = tkinter.Button(self.root, text='Register New', bd=3)
         self.button_login.grid(row=6, column=0)
         self.button_register.grid(row=6, column=1)
         self.button_login.bind('<Button-1>', self.get_login_event)
@@ -97,12 +97,12 @@ class ChattStartup():
         self.test_obj.read_file_of_users()
         answer = self.test_obj.is_name_available(self.username_register)
         if answer == False:
-            tkinter.messagebox.showinfo("alert", "Username is already used")
+            tkinter.messagebox.showinfo("Alert", "That username is already taken")
         # IF user already exists:
         # Users try logging in with password
         if answer == True:
             self.test_obj.add_new(self.username_register, self.userpass_register, self.email_login, self.nickname_login)
-            tkinter.messagebox.showinfo("alert", "new user added")
+            tkinter.messagebox.showinfo("Info", "New user registered and saved to file")
     # CLEAN ENTRY FIELDS
             self.root.quit()
 
@@ -160,7 +160,7 @@ class ChattViewer:
         self.entryOfUser.grid(row = 1,column = 0)
 
         #we build the button
-        self.buttonToTrigg = tkinter.Button(self.root, text = "enter", command = self.sendMsgToConnecter)
+        self.buttonToTrigg = tkinter.Button(self.root, text = "Send", bd=3, bg='blue', command = self.sendMsgToConnecter)
         self.buttonToTrigg.bind('<Return>', self.sendMsgToConnecter())
         self.buttonToTrigg.grid(row = 1,column = 1)
 
