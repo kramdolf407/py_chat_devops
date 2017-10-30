@@ -7,8 +7,14 @@ class User:
         self.email = email_
         self.name = name_
 
-    def is_this_user(self, username, password):
-        if (username == self.username and password == self.password):
+    def does_name_exist(self, username):
+        if (username == self.username):
+            return True
+        else:
+            return False
+
+    def does_user_exist(self, username, password):
+        if (username == self.username) and (password == self.password):
             return True
         else:
             return False
@@ -19,12 +25,10 @@ class Collection_of_users:
         self.list_of_users = []
 
     def add_new_does_name_exist(self, username):
-        try:
-            print("hi success")
-            return "Login success"
-        except:
-            print("Hi user already exists")
-            return "Username already exist"
+        for user in self.list_of_users:
+            if user.does_name_exist(username) == True:
+                return "username is already used"
+        return "username is available"
 
 # Bind to Register
     def add_new(self, username, password, email, name):
@@ -34,7 +38,7 @@ class Collection_of_users:
 # Bind to Login
     def log_in(self, username, password):
         for user in self.list_of_users:
-            if (user.is_this_user(username, password) == True):
+            if user.does_user_exist(username, password) == True:
                 return "Login succeed"
 
         return "Login failed"

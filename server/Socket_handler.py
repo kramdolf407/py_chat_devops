@@ -1,6 +1,6 @@
 import socket
 import _thread
-from server.user_class import *
+#from server.user_class import *
 
 
 class Socket_handler:
