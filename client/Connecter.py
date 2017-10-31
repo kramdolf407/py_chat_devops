@@ -32,6 +32,7 @@ class Connecter:
         server_port = port
         self.clientSocket.connect((server_ip, server_port))
 
+# Not finished
 class ConnecterConf:
 
     def connect_conf(ip, port):

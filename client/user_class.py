@@ -23,6 +23,7 @@ class User:
         else:
             return False
 
+
 class Collection_of_users:
 
     def __init__(self):

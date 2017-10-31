@@ -4,13 +4,18 @@ import _thread
 class Socket_handler:
 
     def __init__(self):
-        self.serverSocket= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        self.serverSocket.bind(('localhost',int(server_port)))
-        self.serverSocket.listen()
-        self.list_of_sockets = []
-        self.list_of_addr = []
+        try:
+            self.serverSocket= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+            self.serverSocket.bind(('localhost',int(server_port)))
+            self.serverSocket.listen()
+            self.list_of_sockets = []
+            self.list_of_addr = []
         #self.list_of_users = []
         #self.read_file_of_users()
+# TODO , throws error if port already in use. BUT needs to return back to startUp, not continues
+        except OSError:
+            print("Port already in use!!")
+            return
 
     def init_the_view_obj(self,chattViewer_):
         self.chattViewer = chattViewer_

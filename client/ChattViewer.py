@@ -1,5 +1,8 @@
+import ipaddress
 import tkinter
 import tkinter.messagebox
+from tkinter import Menu
+
 from client.user_class import *
 from client.Connecter import *
 
@@ -7,6 +10,7 @@ from client.Connecter import *
 class ChattStartup():
     def __init__(self):
         self.root = tkinter.Tk()
+        self.root.title('Client chat config')
         self.entry_srvip = None
         self.entry_srvport = None
         self.entry_username = None
@@ -14,7 +18,7 @@ class ChattStartup():
         self.entry_email_login = None
         self.entry_nickname = None
         self.test_obj = Collection_of_users()
-
+        self.test_obj.read_file_of_users()
         self.build_window()
         self.run()
 
@@ -60,30 +64,39 @@ class ChattStartup():
         self.entry_nickname.grid(row=5, column=1)
         self.entry_nickname.bind(self.get_login_event)
 
-        self.button_login = tkinter.Button(self.root, text='Login', bd=3, bg='SpringGreen3')
-        self.button_register = tkinter.Button(self.root, text='Register New', bd=3, bg='salmon1')
-        self.button_login.grid(row=6, column=0)
-        self.button_register.grid(row=6, column=1)
+        self.button_login = tkinter.Button(self.root, text='Login User', bd=3, bg='SpringGreen3')
+        self.button_register = tkinter.Button(self.root, text='Register New User', bd=3, bg='salmon1')
+        self.button_register.grid(row=6, column=0)
+        self.button_login.grid(row=6, column=1)
         self.button_login.bind('<Button-1>', self.get_login_event)
         self.button_register.bind('<Button-1>', self.get_register_event)
 
     def run(self):
         self.root.mainloop()
         self.root.destroy()
+
 # Bind to login
     def get_login_event(self, event):
         self.username_login = self.entry_username.get()
-        self.password_login = self.entry_password.get()
+        self.userpass_login = self.entry_password.get()
         self.email_login = self.entry_email.get()
         self.nickname_login = self.entry_nickname.get()
-        print("ChattViewer - Get_login_event")
+        self.userip_connect = self.entry_srvip.get()
+        self.userport_connect = self.entry_srvport.get()
+        if not self.port_validate(self.userport_connect):
+            tkinter.messagebox.showinfo('Port invalid', 'You can only choose one port from 1000 to 65535')
+            return
+        if not self.ip_validate(self.userip_connect):
+            tkinter.messagebox.showinfo('IP invalid', 'You can only specify IPv4-addresses, e.g. "127.0.0.1"')
+            return
+
         self.test_obj.read_file_of_users()
-        answer = self.test_obj.log_in(self.username_login, self.password_login)
+        answer = self.test_obj.log_in(self.username_login, self.userpass_login)
         if answer == True:
             self.root.quit()
 
         if answer == False:
-            tkinter.messagebox.showinfo("alert", "Login was not successful")
+                tkinter.messagebox.showinfo("Fail", "Login failed. Please retry.")
 
 # Bind to register
     def get_register_event(self, event):
@@ -94,35 +107,29 @@ class ChattStartup():
         self.nickname_login = self.entry_nickname.get()
         self.userip_connect = self.entry_srvip.get()
         self.userport_connect = self.entry_srvport.get()
-        self.test_obj.read_file_of_users()
+
+        if not self.port_validate(self.userport_connect):
+            tkinter.messagebox.showinfo('Port invalid', 'You can only choose one port from 1000 to 65535')
+            return
+        if not self.ip_validate(self.userip_connect):
+            tkinter.messagebox.showinfo('IP invalid', 'You can only specify IPv4-addresses, e.g. "127.0.0.1"')
+            return
         answer = self.test_obj.is_name_available(self.username_register)
         if answer == False:
-            tkinter.messagebox.showinfo("Alert", "That username is already taken")
+            tkinter.messagebox.showinfo("Alert", "Sorry, that username has already been taken")
+
         # IF user already exists:
         # Users try logging in with password
+        self.test_obj.read_file_of_users()
         if answer == True:
+        #Try:
             self.test_obj.add_new(self.username_register, self.userpass_register, self.email_login, self.nickname_login)
-            tkinter.messagebox.showinfo("Info", "New user registered and saved to file")
-    # CLEAN ENTRY FIELDS
+            tkinter.messagebox.showinfo("Registered" , "Welcome:\n" + self.username_register)
             self.root.quit()
-
+            self.test_obj.write_users_to_file()
     # IF user does NOT exist:
         # ADD:
 
-
-
-# EDIT ------------
-    def client_connect(self, ip, port):
-
-        port = self.entry_srvport.get()
-        ip = self.entry_srvip.get()
-        if not self.port_validate(port):
-            tkinter.messagebox.showinfo('Port invalid', 'You can only choose one port from 999 to 65535')
-            return
-        else:
-            Connecter.connect_conf(ip, port)
-            self.root.quit()
-            return
 
     def port_validate(self, new_port):
         try:
@@ -132,6 +139,14 @@ class ChattStartup():
             return False
         except:
             return False
+
+    def ip_validate(self, new_ip):
+        try:
+            ip_addr = ipaddress.ip_address(new_ip)
+            return True
+        except ValueError:
+            return False
+
 # --------------------
 
 class ChattViewer:
@@ -140,7 +155,20 @@ class ChattViewer:
         self.root = tkinter.Tk()
         self.root.title('Client Chat')
 
+
+
     def buildGui(self, master=None):
+
+        menuBar=Menu(self.root)
+        self.root.config(menu=menuBar)
+        fileMenu = Menu(menuBar, tearoff=0)
+        fileMenu.add_command(label="Change username", command=self.change_username)
+        fileMenu.add_command(label="Change password", command=self.change_password)
+        fileMenu.add_separator()
+        fileMenu.add_command(label="Delete account", command=self.delete_me)
+        fileMenu.add_separator()
+        fileMenu.add_command(label="Exit", command=self.quit_me)
+        menuBar.add_cascade(label="Commands", menu=fileMenu)
 
         #we build the chattContent/
         scroll = tkinter.Scrollbar(self.root)
@@ -171,3 +199,18 @@ class ChattViewer:
 
     def showMessage(self,text):
         self.chattContents.insert(tkinter.END,text+"\n")
+
+# TODO COMPLETE:
+    def change_username(self):
+        print("I want to change my name")
+
+    def change_password(self):
+        print("I want to change my password")
+
+    def delete_me(self):
+        print("Trying to delete user account")
+
+    def quit_me(self):
+        self.root.quit()
+        self.root.destroy()
+        exit()

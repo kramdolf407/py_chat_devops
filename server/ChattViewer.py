@@ -1,5 +1,6 @@
 import tkinter
 from tkinter import messagebox
+from tkinter import Menu
 from server.Socket_handler import *
 
 started = False
@@ -8,13 +9,14 @@ class ChattStartup():
 
         def __init__(self):
             self.root = tkinter.Tk()
+            self.root.title('Host configurator')
             self.entry_srvport = None
             self.build_window()
             self.run()
 
         def build_window(self):
 
-            self.label_srvport = tkinter.Label(self.root, text='Port (999-65535): ', width=20)
+            self.label_srvport = tkinter.Label(self.root, text='Port (1000-65535): ', width=20)
             self.label_srvport.grid(row=1, column=0)
 
             self.entry_srvport = tkinter.Entry(self.root, width=20)
@@ -32,7 +34,7 @@ class ChattStartup():
         def server_config_start(self, new_port):
             new_port = self.entry_srvport.get()
             if not self.port_validate(new_port):
-                tkinter.messagebox.showinfo('Port invalid', 'You can only choose one port from 999 to 65535')
+                tkinter.messagebox.showinfo('Port invalid', 'You can only choose one port from 1000 to 65535')
                 return
             else:
                 Socket_handler.server_port(new_port)
@@ -61,6 +63,17 @@ class ChattViewer():
         self.root.destroy()
 
     def buildGui(self, master=None):
+
+        menuBar=Menu(self.root)
+        self.root.config(menu=menuBar)
+        fileMenu = Menu(menuBar, tearoff=0)
+        fileMenu.add_command(label="Kick user", command=self.kick_user)
+        fileMenu.add_separator()
+        fileMenu.add_command(label="List of users", command=self.list_users)
+        fileMenu.add_separator()
+        fileMenu.add_command(label="Exit", command=self.quit_me)
+        menuBar.add_cascade(label="Commands", menu=fileMenu)
+
         global started
         #we build the chattContent
         started = True
@@ -89,3 +102,15 @@ class ChattViewer():
 
     def showMessage(self,text):
         self.chattContents.insert(tkinter.END,text+"\n")
+
+# TODO COMPLETE:
+    def kick_user(self):
+        print("Kick user")
+
+    def list_users(self):
+        print("I want to list users")
+
+    def quit_me(self):
+        self.root.quit()
+        self.root.destroy()
+        exit()
