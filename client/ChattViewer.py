@@ -95,8 +95,8 @@ class ChattStartup():
 
         if answer == False:
                 tkinter.messagebox.showinfo("Fail", "Login failed. Please retry.")
-        ConnecterConf.connect_conf(server_ip, server_port)
-        Connecter.connect_conf(server_ip, server_port)
+        Connecter.connect_ip(self.userip_connect)
+        Connecter.connect_port(self.userport_connect)
 
 
     def get_register_event(self, event):
@@ -117,8 +117,6 @@ class ChattStartup():
         if answer == False:
             tkinter.messagebox.showinfo("Alert", "Sorry, that username has already been taken")
 
-        # IF user already exists:
-        # Users try logging in with password
         self.test_obj = Collection_of_users()
         self.test_obj.read_file_of_users()
         if answer == True:
@@ -127,8 +125,10 @@ class ChattStartup():
             tkinter.messagebox.showinfo("Registered" , "Welcome:\n" + self.username_register)
             self.root.quit()
             self.test_obj.write_users_to_file()
-    # IF user does NOT exist:
-        # ADD:
+        Connecter.connect_ip(self.userip_connect)
+        Connecter.connect_port(self.userport_connect)
+        self.root.quit()
+
 
     def port_validate(self, new_port):
         try:
@@ -152,7 +152,8 @@ class ChattViewer:
         self.connecter = connecter_
         self.root = tkinter.Tk()
         self.root.title('Client Chat')
-
+        self.test_obj = Collection_of_users()
+        self.test_obj.read_file_of_users()
 
 
     def buildGui(self, master=None):
@@ -198,7 +199,6 @@ class ChattViewer:
     def showMessage(self,text):
         self.chattContents.insert(tkinter.END,text+"\n")
 
-# TODO COMPLETE:
     def change_username(self):
         print("I want to change my name")
 

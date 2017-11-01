@@ -37,30 +37,31 @@ class Collection_of_users:
         else:
             return True
 
-# Bind to Login
     def log_in(self, username, password):
         print("In log_in")
         for user in self.list_of_users:
             if user.does_user_exist(username, password) == True:
                 return True
-
         return False
 
-# Bind to Register
     def add_new(self, username, password, email, name):
         print("In add_new")
         user1 = User(username, password, email, name)
         self.list_of_users.append(user1)
 
-# TODO - Fixa till dessa funktioner:
-#   # def delete_my_user(self, username):
-#        username = self.get_usrer_bby_username(username.lower())
-#        if user == -1:
-#        print("I want to delete my account")
-#
-## TODO - Fixa till denna funktion
-#    def change_my_nickname(self):
-#        print("I want to change my nickname")
+
+    def delete_my_user(self, username):
+        print("Trying to delete user")
+        for user in self.list_of_users:
+            if user.username == username:
+                user.remove()
+
+    def change_my_nicknam(self, username, new_nickname):
+        print("Trying to changenickname")
+        for user in self.list_of_users:
+            if user.username ==username:
+                user.name = new_nickname
+
 
     def write_users_to_file(self):
         print("In write_users_to_file")
