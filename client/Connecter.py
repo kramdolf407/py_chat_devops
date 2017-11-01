@@ -35,10 +35,8 @@ class Connecter:
 # Not finished
 class ConnecterConf:
 
-    def connect_conf(ip, port):
-        global server_ip
+    def connect_conf(server_ip_, server_port_):
         global server_port
-        self = Connecter
-        server_ip = ip
-        server_port = port
-        Connecter.connect(self, server_ip, server_port)
+        server_ip = server_ip_
+        server_port = server_port_
+        Connecter.connect(server_ip, server_port)

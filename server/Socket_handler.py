@@ -27,10 +27,16 @@ class Socket_handler:
 
         self.startReceiver(clientSocket, addr)
 
+
+# TODO add try and except (ConnectionResetError):
     def sendMsg(self,text):
-        self.chattViewer.showMessage("Admin: "+text)
-        for soc in self.list_of_sockets:
-            soc.send(str.encode("Admin: "+text))
+        try:
+            self.chattViewer.showMessage("Admin: "+text)
+            for soc in self.list_of_sockets:
+                soc.send(str.encode("Admin: "+text))
+        except ConnectionResetError:
+            print("Hi")
+
 
     def startReceiver(self, csock, addr):
         _thread.start_new_thread(self.func_to_receiver,(csock,addr,))

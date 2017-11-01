@@ -23,7 +23,6 @@ class ChattStartup():
         self.run()
 
     def build_window(self):
-
         self.label_srvip = tkinter.Label(self.root, text='Connect to IP: ', width=20)
         self.label_srvport = tkinter.Label(self.root, text='Connect to port: ', width=20)
 
@@ -31,14 +30,14 @@ class ChattStartup():
         self.label_password = tkinter.Label(self.root, text='Password: ', width=20)
         self.label_email = tkinter.Label(self.root, text='Email: ', width=20)
         self.label_nickname = tkinter.Label(self.root, text='Nickname: ', width=20)
-        # Grid buttons
+
         self.label_srvip.grid(row=0,column=0)
         self.label_srvport.grid(row=1,column=0)
         self.label_username.grid(row=2,column=0)
         self.label_password.grid(row=3,column=0)
         self.label_email.grid(row=4,column=0)
         self.label_nickname.grid(row=5,column=0)
-        # Grid entries, set focus and bind keys:
+
         self.entry_srvip = tkinter.Entry(self.root, width=20, bd=2)
         self.entry_srvip.focus_set()
         self.entry_srvip.grid(row=0,column=1)
@@ -75,7 +74,6 @@ class ChattStartup():
         self.root.mainloop()
         self.root.destroy()
 
-# Bind to login
     def get_login_event(self, event):
         self.username_login = self.entry_username.get()
         self.userpass_login = self.entry_password.get()
@@ -89,7 +87,7 @@ class ChattStartup():
         if not self.ip_validate(self.userip_connect):
             tkinter.messagebox.showinfo('IP invalid', 'You can only specify IPv4-addresses, e.g. "127.0.0.1"')
             return
-
+        self.test_obj = Collection_of_users()
         self.test_obj.read_file_of_users()
         answer = self.test_obj.log_in(self.username_login, self.userpass_login)
         if answer == True:
@@ -97,10 +95,11 @@ class ChattStartup():
 
         if answer == False:
                 tkinter.messagebox.showinfo("Fail", "Login failed. Please retry.")
+        ConnecterConf.connect_conf(server_ip, server_port)
+        Connecter.connect_conf(server_ip, server_port)
 
-# Bind to register
+
     def get_register_event(self, event):
-
         self.username_register = self.entry_username.get()
         self.userpass_register = self.entry_password.get()
         self.email_login = self.entry_email.get()
@@ -120,6 +119,7 @@ class ChattStartup():
 
         # IF user already exists:
         # Users try logging in with password
+        self.test_obj = Collection_of_users()
         self.test_obj.read_file_of_users()
         if answer == True:
         #Try:
@@ -129,7 +129,6 @@ class ChattStartup():
             self.test_obj.write_users_to_file()
     # IF user does NOT exist:
         # ADD:
-
 
     def port_validate(self, new_port):
         try:
@@ -142,12 +141,11 @@ class ChattStartup():
 
     def ip_validate(self, new_ip):
         try:
-            ip_addr = ipaddress.ip_address(new_ip)
+            new_ip = ipaddress.ip_address(new_ip)
             return True
         except ValueError:
             return False
 
-# --------------------
 
 class ChattViewer:
     def __init__(self,connecter_):

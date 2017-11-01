@@ -1,4 +1,4 @@
-import tkinter.messagebox as msg
+
 
 class User:
 
@@ -11,8 +11,8 @@ class User:
 
     def does_name_exist(self, username):
         print("In does_name_exist")
-        if username == self.username:
-            return True
+        if username == self.username.lower():
+            return username
         else:
             return False
 
@@ -30,22 +30,12 @@ class Collection_of_users:
         self.list_of_users = []
 
     def is_name_available(self, username):
-        print("In add_new_does_name_exist")
         for user in self.list_of_users:
             if user.does_name_exist(username) == True:
                 print("user already exist!")
-                return False
-        print("username is not in use!")
-
-    # Ask for confirm
-    # Send to ADD_NEW?
-        return True
-
-# Bind to Register
-    def add_new(self, username, password, email, name):
-        print("In add_new")
-        user1 = User(username, password, email, name)
-        self.list_of_users.append(user1)
+                return username
+        else:
+            return True
 
 # Bind to Login
     def log_in(self, username, password):
@@ -55,7 +45,23 @@ class Collection_of_users:
                 return True
 
         return False
-#test
+
+# Bind to Register
+    def add_new(self, username, password, email, name):
+        print("In add_new")
+        user1 = User(username, password, email, name)
+        self.list_of_users.append(user1)
+
+# TODO - Fixa till dessa funktioner:
+#   # def delete_my_user(self, username):
+#        username = self.get_usrer_bby_username(username.lower())
+#        if user == -1:
+#        print("I want to delete my account")
+#
+## TODO - Fixa till denna funktion
+#    def change_my_nickname(self):
+#        print("I want to change my nickname")
+
     def write_users_to_file(self):
         print("In write_users_to_file")
         file = open("users.txt", "w")
