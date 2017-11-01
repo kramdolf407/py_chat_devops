@@ -3,6 +3,7 @@ import _thread
 
 server_port = 9999
 
+
 class Socket_handler:
 
     def __init__(self):
@@ -12,8 +13,7 @@ class Socket_handler:
             self.serverSocket.listen()
             self.list_of_sockets = []
             self.list_of_addr = []
-        #self.list_of_users = []
-        #self.read_file_of_users()
+
 # TODO , throws error if port already in use. BUT needs to return back to startUp, not continues
         except OSError:
             print("Port already in use!!")
@@ -26,7 +26,6 @@ class Socket_handler:
         clientSocket, addr = self.serverSocket.accept()
         self.list_of_addr.append(addr)
         self.list_of_sockets.append(clientSocket)
-
         self.startReceiver(clientSocket, addr)
 
 
@@ -38,7 +37,6 @@ class Socket_handler:
                 soc.send(str.encode("Admin: "+text))
         except ConnectionResetError:
             print("Hi")
-
 
     def startReceiver(self, csock, addr):
         _thread.start_new_thread(self.func_to_receiver,(csock,addr,))

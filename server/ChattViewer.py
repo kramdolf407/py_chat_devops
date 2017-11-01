@@ -3,14 +3,12 @@ from tkinter import messagebox
 from tkinter import Menu
 from server.Socket_handler import *
 
-started = False
 
 class ChattStartup():
 
         def __init__(self):
             self.root = tkinter.Tk()
             self.root.title('Host configurator')
-            self.entry_srvport = None
             self.build_window()
             self.run()
 
@@ -50,6 +48,7 @@ class ChattStartup():
             except:
                 return False
 
+
 class ChattViewer():
 
     def __init__(self,listener_, master=None):
@@ -74,9 +73,7 @@ class ChattViewer():
         fileMenu.add_command(label="Exit", command=self.quit_me)
         menuBar.add_cascade(label="Commands", menu=fileMenu)
 
-        global started
         #we build the chattContent
-        started = True
         scroll = tkinter.Scrollbar(self.root)
         scroll.grid(row = 0, column = 1, sticky=tkinter.N+tkinter.S)
 

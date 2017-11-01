@@ -62,7 +62,6 @@ class Collection_of_users:
             if user.username ==username:
                 user.name = new_nickname
 
-
     def write_users_to_file(self):
         print("In write_users_to_file")
         file = open("users.txt", "w")

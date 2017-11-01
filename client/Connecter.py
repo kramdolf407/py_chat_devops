@@ -1,10 +1,25 @@
 import socket
 import _thread
 
+
 class Connecter:
 
     def __init__(self):
         self.clientSocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+
+    def connect_ip(serverip):
+        global server_ip
+        server_ip = serverip
+
+    def connect_port(serverport):
+        global server_port
+        server_port = serverport
+
+    def connect_conf(self):
+        global server_ip
+        global server_port
+        Connecter.connect(self, str(server_ip), int(server_port))
+
 # TODO: Add try and except ("ConnectionRefusedErrror", "TimeoutErrror")
     def connect(self,server_ip, server_port):
         self.clientSocket.connect((server_ip, server_port))
@@ -21,19 +36,9 @@ class Connecter:
             msg = self.clientSocket.recv(1024).decode()
             self.chattViewer.showMessage(msg)
 
-    def connect_ip(serverip):
-        global server_ip
-        server_ip = serverip
-        print(server_ip)
 
-    def connect_port(serverport):
-        global server_port
-        server_port = serverport
-        print(server_port)
 
-    def connect_conf(self):
-        global server_ip
-        global server_port
-        Connecter.connect(self, str(server_ip), int(server_port))
+
+
 
 

@@ -20,7 +20,14 @@ class ChattStartup():
         self.test_obj = Collection_of_users()
         self.test_obj.read_file_of_users()
         self.build_window()
-        self.run()
+        self.root.mainloop()
+        self.root.destroy()
+# TODO , probably just remove.. Test
+        # self.run()
+
+    #def run(self):
+     #   self.root.mainloop()
+      #  self.root.destroy()
 
     def build_window(self):
         self.label_srvip = tkinter.Label(self.root, text='Connect to IP: ', width=20)
@@ -70,10 +77,6 @@ class ChattStartup():
         self.button_login.bind('<Button-1>', self.get_login_event)
         self.button_register.bind('<Button-1>', self.get_register_event)
 
-    def run(self):
-        self.root.mainloop()
-        self.root.destroy()
-
     def get_login_event(self, event):
         self.username_login = self.entry_username.get()
         self.userpass_login = self.entry_password.get()
@@ -98,7 +101,6 @@ class ChattStartup():
         Connecter.connect_ip(self.userip_connect)
         Connecter.connect_port(self.userport_connect)
 
-
     def get_register_event(self, event):
         self.username_register = self.entry_username.get()
         self.userpass_register = self.entry_password.get()
@@ -106,29 +108,31 @@ class ChattStartup():
         self.nickname_login = self.entry_nickname.get()
         self.userip_connect = self.entry_srvip.get()
         self.userport_connect = self.entry_srvport.get()
+        self.test_obj = Collection_of_users()
+        self.test_obj.read_file_of_users()
 
         if not self.port_validate(self.userport_connect):
             tkinter.messagebox.showinfo('Port invalid', 'You can only choose one port from 1000 to 65535')
             return
+
         if not self.ip_validate(self.userip_connect):
             tkinter.messagebox.showinfo('IP invalid', 'You can only specify IPv4-addresses, e.g. "127.0.0.1"')
             return
+
         answer = self.test_obj.is_name_available(self.username_register)
+
         if answer == False:
             tkinter.messagebox.showinfo("Alert", "Sorry, that username has already been taken")
 
-        self.test_obj = Collection_of_users()
-        self.test_obj.read_file_of_users()
         if answer == True:
         #Try:
             self.test_obj.add_new(self.username_register, self.userpass_register, self.email_login, self.nickname_login)
             tkinter.messagebox.showinfo("Registered" , "Welcome:\n" + self.username_register)
-            self.root.quit()
             self.test_obj.write_users_to_file()
-        Connecter.connect_ip(self.userip_connect)
-        Connecter.connect_port(self.userport_connect)
+            Connecter.connect_ip(self.userip_connect)
+            Connecter.connect_port(self.userport_connect)
+            self.root.quit()
         self.root.quit()
-
 
     def port_validate(self, new_port):
         try:
@@ -148,6 +152,7 @@ class ChattStartup():
 
 
 class ChattViewer:
+
     def __init__(self,connecter_):
         self.connecter = connecter_
         self.root = tkinter.Tk()
@@ -155,9 +160,7 @@ class ChattViewer:
         self.test_obj = Collection_of_users()
         self.test_obj.read_file_of_users()
 
-
     def buildGui(self, master=None):
-
         menuBar=Menu(self.root)
         self.root.config(menu=menuBar)
         fileMenu = Menu(menuBar, tearoff=0)
@@ -188,7 +191,6 @@ class ChattViewer:
         self.buttonToTrigg = tkinter.Button(self.root, text = "Send", bd=3, bg='sky blue', command = self.sendMsgToConnecter)
         self.buttonToTrigg.bind('<Return>', self.sendMsgToConnecter())
         self.buttonToTrigg.grid(row = 1,column = 1)
-
 
     def sendMsgToConnecter(self):
         self.connecter.sendMsg(self.entryOfUser.get())
