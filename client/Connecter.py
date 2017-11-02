@@ -1,8 +1,6 @@
 import socket
 import _thread
 
-
-
 class Connecter:
 
     def __init__(self):

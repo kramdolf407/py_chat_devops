@@ -3,7 +3,6 @@ import _thread
 
 server_port = 9999
 
-
 class Socket_handler:
 
     def __init__(self):

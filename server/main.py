@@ -19,3 +19,5 @@ def funcToThread():
 _thread.start_new_thread(funcToThread, ())
 
 chattV.start()
+
+
