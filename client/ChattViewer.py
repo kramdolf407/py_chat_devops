@@ -84,33 +84,35 @@ class ChattStartup():
         self.nickname_login = self.entry_nickname.get()
         self.userip_connect = self.entry_srvip.get()
         self.userport_connect = self.entry_srvport.get()
-        if not self.port_validate(self.userport_connect):
-            tkinter.messagebox.showinfo('Port invalid', 'You can only choose one port from 1000 to 65535')
-            return
+        self.test_obj = Collection_of_users()
+        self.test_obj.read_file_of_users()
+
         if not self.ip_validate(self.userip_connect):
             tkinter.messagebox.showinfo('IP invalid', 'You can only specify IPv4-addresses, e.g. "127.0.0.1"')
             return
 
-        if not self.email_login == "":
-            if not self.nickname_login == "":
-                if not self.username_login == "":
-                    if not self.userpass_login == "":
-                        pass
-                    else:
-                        tkinter.messagebox.showinfo("Problem","No password")
-                        return
-                else:
-                    tkinter.messagebox.showinfo("Problem","No username")
-                    return
-            else:
-                tkinter.messagebox.showinfo("Problem","No nickname")
-                return
-        else:
-            tkinter.messagebox.showinfo("Problem", "No email")
+        if not self.port_validate(self.userport_connect):
+            tkinter.messagebox.showinfo('Port invalid', 'You can only choose one port from 1000 to 65535')
             return
 
-        self.test_obj = Collection_of_users()
-        self.test_obj.read_file_of_users()
+        if not self.username_login == "":
+            if not self.userpass_login == "":
+                if not self.email_login == "":
+                    if not self.nickname_login == "":
+                        pass
+                    else:
+                        tkinter.messagebox.showinfo("Problem","No nickname?")
+                        return
+                else:
+                    tkinter.messagebox.showinfo("Problem","No email?")
+                    return
+            else:
+                tkinter.messagebox.showinfo("Problem","No password?")
+                return
+        else:
+            tkinter.messagebox.showinfo("Problem", "No username?")
+            return
+
         answer = self.test_obj.log_in(self.username_login, self.userpass_login)
         if answer == True:
             self.root.quit()
@@ -130,30 +132,30 @@ class ChattStartup():
         self.test_obj = Collection_of_users()
         self.test_obj.read_file_of_users()
 
-        if not self.port_validate(self.userport_connect):
-            tkinter.messagebox.showinfo('Port invalid', 'You can only choose one port from 1000 to 65535')
-            return
-
         if not self.ip_validate(self.userip_connect):
             tkinter.messagebox.showinfo('IP invalid', 'You can only specify IPv4-addresses, e.g. "127.0.0.1"')
             return
 
-        if not self.email_login == "":
-            if not self.nickname_login == "":
-                if not self.username_register == "":
-                    if not self.userpass_register == "":
+        if not self.port_validate(self.userport_connect):
+            tkinter.messagebox.showinfo('Port invalid', 'You can only choose one port from 1000 to 65535')
+            return
+
+        if not self.username_login == "":
+            if not self.userpass_login == "":
+                if not self.email_login == "":
+                    if not self.nickname_login == "":
                         pass
                     else:
-                        tkinter.messagebox.showinfo("Problem","No password")
+                        tkinter.messagebox.showinfo("Problem","No nickname?")
                         return
                 else:
-                    tkinter.messagebox.showinfo("Problem","No username")
+                    tkinter.messagebox.showinfo("Problem","No email?")
                     return
             else:
-                tkinter.messagebox.showinfo("Problem","No nickname")
+                tkinter.messagebox.showinfo("Problem","No password?")
                 return
         else:
-            tkinter.messagebox.showinfo("Problem", "No email")
+            tkinter.messagebox.showinfo("Problem", "No username?")
             return
 
         answer = self.test_obj.is_name_available(self.username_register)
@@ -171,6 +173,14 @@ class ChattStartup():
             self.root.quit()
         self.root.quit()
 
+    def ip_validate(self, new_ip_):
+        self.new_ip = new_ip_
+        try:
+            self.new_ip = ipaddress.ip_address(self.new_ip)
+            return True
+        except ValueError:
+            return False
+
     def port_validate(self, new_port):
         try:
             new_port = int(new_port)
@@ -178,13 +188,6 @@ class ChattStartup():
                 return True
             return False
         except:
-            return False
-
-    def ip_validate(self, new_ip):
-        try:
-            new_ip = ipaddress.ip_address(new_ip)
-            return True
-        except ValueError:
             return False
 
 
@@ -214,14 +217,13 @@ class ChattViewer:
         scroll.grid(row = 0, column = 1, sticky=tkinter.N+tkinter.S)
 
         self.chattContents = tkinter.Text(self.root, yscrollcommand  = scroll.set)
-# Uncomment later. When sending messages , change state=disabled
-        #self.chattContents.configure(state="disabled")
+        self.chattContents.configure(state="disabled")
         self.chattContents.grid(row = 0,column = 0)
 
         scroll.config(command=self.chattContents.yview)
 
         #we build the Enry
-        self.entryOfUser = tkinter.Entry(self.root)
+        self.entryOfUser = tkinter.Entry(self.root, width=90)
         self.entryOfUser.grid(row = 1,column = 0)
 
         #we build the button
@@ -236,7 +238,9 @@ class ChattViewer:
         self.root.mainloop()
 
     def showMessage(self,text):
+        self.chattContents.configure(state="normal")
         self.chattContents.insert(tkinter.END,text+"\n")
+        self.chattContents.configure(state="disabled")
 
     def change_username(self):
         print("I want to change my name")

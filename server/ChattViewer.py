@@ -78,14 +78,14 @@ class ChattViewer():
         scroll.grid(row = 0, column = 1, sticky=tkinter.N+tkinter.S)
 
         self.chattContents = tkinter.Text(self.root, yscrollcommand  = scroll.set)
-        #self.chattContents.configure(state="disabled")
+        self.chattContents.configure(state="disabled")
 
         self.chattContents.grid(row = 0,column = 0)
 
         scroll.config(command=self.chattContents.yview)
 
         #we build the Enry
-        self.entryOfUser = tkinter.Entry(self.root)
+        self.entryOfUser = tkinter.Entry(self.root, width=90)
         self.entryOfUser.grid(row = 1,column = 0)
 
         #we build the button
@@ -98,8 +98,9 @@ class ChattViewer():
         self.listener.sendMsg(self.entryOfUser.get())
 
     def showMessage(self,text):
+        self.chattContents.configure(state="normal")
         self.chattContents.insert(tkinter.END,text+"\n")
-
+        self.chattContents.configure(state="disabled")
 # TODO COMPLETE:
     def kick_user(self):
         print("Kick user")

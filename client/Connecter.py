@@ -2,6 +2,7 @@ import socket
 import _thread
 
 
+
 class Connecter:
 
     def __init__(self):
@@ -22,7 +23,15 @@ class Connecter:
 
 # TODO: Add try and except ("ConnectionRefusedErrror", "TimeoutErrror")
     def connect(self,server_ip, server_port):
-        self.clientSocket.connect((server_ip, server_port))
+        try:
+            self.clientSocket.connect((server_ip, server_port))
+        except ConnectionRefusedError:
+            print("ConnectionRefueseDerrrororo")
+            return False
+
+        except TimeoutError:
+            print("TimeoutErrro")
+            return False
 
     def sendMsg(self, text):
         self.clientSocket.send(str.encode(text))

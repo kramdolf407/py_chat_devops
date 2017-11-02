@@ -22,6 +22,17 @@ class Socket_handler:
     def init_the_view_obj(self,chattViewer_):
         self.chattViewer = chattViewer_
 
+    def server_port(srvport):
+        global server_port
+        server_port = srvport
+
+    def binder(self):
+        try:
+            self.serverSocket.bind(('localhost',int(server_port)))
+            return True
+        except Exception:
+            return False
+
     def acceptConnection(self):
         clientSocket, addr = self.serverSocket.accept()
         self.list_of_addr.append(addr)
@@ -59,6 +70,3 @@ class Socket_handler:
                 csock.close()
                 return False
 
-    def server_port(srvport):
-        global server_port
-        server_port = srvport
