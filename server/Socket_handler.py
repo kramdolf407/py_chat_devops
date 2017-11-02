@@ -59,8 +59,6 @@ class Socket_handler:
                 csock.close()
                 return False
 
-
-
     def server_port(srvport):
         global server_port
         server_port = srvport

@@ -90,6 +90,25 @@ class ChattStartup():
         if not self.ip_validate(self.userip_connect):
             tkinter.messagebox.showinfo('IP invalid', 'You can only specify IPv4-addresses, e.g. "127.0.0.1"')
             return
+
+        if not self.email_login == "":
+            if not self.nickname_login == "":
+                if not self.username_login == "":
+                    if not self.userpass_login == "":
+                        pass
+                    else:
+                        tkinter.messagebox.showinfo("Problem","No password")
+                        return
+                else:
+                    tkinter.messagebox.showinfo("Problem","No username")
+                    return
+            else:
+                tkinter.messagebox.showinfo("Problem","No nickname")
+                return
+        else:
+            tkinter.messagebox.showinfo("Problem", "No email")
+            return
+
         self.test_obj = Collection_of_users()
         self.test_obj.read_file_of_users()
         answer = self.test_obj.log_in(self.username_login, self.userpass_login)
@@ -117,6 +136,24 @@ class ChattStartup():
 
         if not self.ip_validate(self.userip_connect):
             tkinter.messagebox.showinfo('IP invalid', 'You can only specify IPv4-addresses, e.g. "127.0.0.1"')
+            return
+
+        if not self.email_login == "":
+            if not self.nickname_login == "":
+                if not self.username_register == "":
+                    if not self.userpass_register == "":
+                        pass
+                    else:
+                        tkinter.messagebox.showinfo("Problem","No password")
+                        return
+                else:
+                    tkinter.messagebox.showinfo("Problem","No username")
+                    return
+            else:
+                tkinter.messagebox.showinfo("Problem","No nickname")
+                return
+        else:
+            tkinter.messagebox.showinfo("Problem", "No email")
             return
 
         answer = self.test_obj.is_name_available(self.username_register)
