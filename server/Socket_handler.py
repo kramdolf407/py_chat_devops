@@ -55,11 +55,11 @@ class Socket_handler:
                     for sock in self.list_of_sockets:#
                         sock.send(str.encode(str(addr)+ ": " + msg))
             except OSError:
-                print(self.list_of_sockets)
-                print("\n")
                 print(csock)
                 csock.close()
-                self.list_of_sockets.remove(csock())
+                return False
+
+
 
     def server_port(srvport):
         global server_port
