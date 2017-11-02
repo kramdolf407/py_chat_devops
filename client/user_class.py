@@ -25,6 +25,13 @@ class Collection_of_users:
     def __init__(self):
         self.list_of_users = []
 
+    def get_user_username(self, username):
+        for user in self.list_of_users:
+            if user.username == username.lower():
+                return user
+        else:
+            return False
+
     def is_name_available(self, username):
         for user in self.list_of_users:
             if user.does_name_exist(username) == True:

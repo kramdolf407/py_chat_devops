@@ -32,7 +32,10 @@ class Connecter:
             return False
 
     def sendMsg(self, text):
-        self.clientSocket.send(str.encode(text))
+        try:
+            self.clientSocket.send(str.encode(text))
+        except OSError:
+            return False
 
     def startReceiverThread(self,chattViewer_):
         self.chattViewer = chattViewer_
