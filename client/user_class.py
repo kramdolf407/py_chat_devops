@@ -10,14 +10,12 @@ class User:
         self.name = name_
 
     def does_name_exist(self, username):
-        print("In does_name_exist")
         if username == self.username.lower():
             return username
         else:
             return False
 
     def does_user_exist(self, username, password):
-        print("In does_user_exist")
         if username == self.username and password == self.password:
             return True
         else:
@@ -38,32 +36,27 @@ class Collection_of_users:
             return True
 
     def log_in(self, username, password):
-        print("In log_in")
         for user in self.list_of_users:
             if user.does_user_exist(username, password) == True:
                 return True
         return False
 
     def add_new(self, username, password, email, name):
-        print("In add_new")
         user1 = User(username, password, email, name)
         self.list_of_users.append(user1)
 
 
     def delete_my_user(self, username):
-        print("Trying to delete user")
         for user in self.list_of_users:
             if user.username == username:
                 user.remove()
 
     def change_my_nicknam(self, username, new_nickname):
-        print("Trying to changenickname")
         for user in self.list_of_users:
             if user.username ==username:
                 user.name = new_nickname
 
     def write_users_to_file(self):
-        print("In write_users_to_file")
         file = open("users.txt", "w")
         for user in self.list_of_users:
             username = user.username
@@ -79,7 +72,6 @@ class Collection_of_users:
         file.close()
 
     def read_file_of_users(self):
-        print("In read_file_of_users")
         try:
             file = open("users.txt", "r")
             while True:

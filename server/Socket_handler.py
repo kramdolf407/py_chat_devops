@@ -34,19 +34,32 @@ class Socket_handler:
         try:
             self.chattViewer.showMessage("Admin: "+text)
             for soc in self.list_of_sockets:
-                soc.send(str.encode("Admin: "+text))
+                try:
+                    soc.send(str.encode("Admin: "+text))
+                except Exception:
+                    soc.close()
+                    self.list_of_sockets.remove(soc)
+
         except ConnectionResetError:
-            print("Hi")
+            print("ConnectionResetError in sendMSG")
 
     def startReceiver(self, csock, addr):
         _thread.start_new_thread(self.func_to_receiver,(csock,addr,))
 
     def func_to_receiver(self,csock, addr):
         while True:
-            msg = csock.recv(1024).decode()
-            self.chattViewer.showMessage(str(addr)+": "+msg)
-            for sock in self.list_of_sockets:
-                sock.send(str.encode(str(addr)+": "+msg))
+            try:
+                msg = csock.recv(1024).decode()
+                if not msg == "":
+                    self.chattViewer.showMessage(str(addr)+ " " + msg)
+                    for sock in self.list_of_sockets:#
+                        sock.send(str.encode(str(addr)+ ": " + msg))
+            except OSError:
+                print(self.list_of_sockets)
+                print("\n")
+                print(csock)
+                csock.close()
+                self.list_of_sockets.remove(csock())
 
     def server_port(srvport):
         global server_port
